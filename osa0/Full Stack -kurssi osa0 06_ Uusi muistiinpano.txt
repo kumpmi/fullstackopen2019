@@ -1,0 +1,10 @@
+title Full Stack -kurssi osa0 0.6: Uusi muistiinpano
+participant Käyttäjä
+participant Selain
+participant Palvelin
+
+Käyttäjä->Selain: Käyttäjä syöttää muistiinpanon tekstikenttään ja painaa talleta -painiketta
+
+Selain->Palvelin: Request URL: https://fullstack-exampleapp.herokuapp.com/new_note_spa Method: Post
+Palvelin->Selain: {"message":"note created"}
+Selain->Käyttäjä: Käyttäjä näkee tallettamansa muisitinpanon listassa.

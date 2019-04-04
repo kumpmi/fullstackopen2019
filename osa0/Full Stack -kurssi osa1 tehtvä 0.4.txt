@@ -1,0 +1,22 @@
+title Full Stack -kurssi osa1 tehtävä 0.4
+participant Käyttäjä
+participant Selain
+participant Palvelin
+
+
+Käyttäjä->Selain: Käyttäjä kirjoittaa  muistiinpanon tekstikenttään ja painaa talleta painiketta
+Selain->Palvelin: Request URL: https://fullstack-exampleapp.herokuapp.com/new_note
+
+Palvelin->Selain: Status Code: 302 Found Uudelleen ohjauspyyntö
+Selain->Palvelin: Request URL: https://fullstack-exampleapp.herokuapp.com/notes
+Palvelin->Selain: Status Code: 200 OK: HTML -latautuu
+Selain->Palvelin:Request URL: https://fullstack-exampleapp.herokuapp.com/main.css
+Palvelin->Selain:Status Code: 200 ok CSS -tyylitiedosto renderoituu
+Selain->Palvelin:Request URL: https://fullstack-exampleapp.herokuapp.com/main.js
+Palvelin->Selain:Status Code: 200 ok Main.js latautuu
+Selain->Selain: Request URL: chrome-extension://cchofejnakigbabpcnlcglfdjhglepam/js/site-script.js
+Selain->Selain: Status Code 200 ok
+Selain->Palvelin:Request URL: https://fullstack-exampleapp.herokuapp.com/data.json Request Method: GET
+Palvelin->Selain:Status Code 200 ok. Palvelin palauttaa kaikki notesit JSON-muodossa[{"content":"HTML on helppoa","date":"2017-12-10T17:30:31.098Z"},{"content":"Selain pystyy suorittamaan vain javascriptiä","date":"2017-12-10T18:39:34.091Z"},{"content":"HTTP-protokollan tärkeimmät metodit ovat GET ja POST","date":"2017-12-10T19:20:14.298Z"},{"content":"Ölölöö","date":"2019-04-04T05:17:45.959Z"},{"content":"Tämä on testi","date":"2019-04-04T05:29:55.057Z"}]
+
+Selain->Käyttäjä: Käyttäjän syöttämä muistiinpano näkyy listassa

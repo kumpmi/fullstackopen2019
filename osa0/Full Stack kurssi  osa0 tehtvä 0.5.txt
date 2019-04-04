@@ -1,0 +1,10 @@
+title Full Stack kurssi  osa0 tehtävä 0.5
+participant Selain
+participant Palvelin
+
+Selain->Palvelin: Request URL: https://fullstack-exampleapp.herokuapp.com/spa.js
+Palvelin->Selain: Status code 200: spa.js latautuu ja sisältö renderoituu selaimeen HTML -muodossa
+
+
+
+
