@@ -2,14 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const App = () => {
-
     const course = 'Half Stack -sovelluskehitys'
-    const part1 = 'Reactin perusteet'
-    const exercises1 = 10
-    const part2 = 'Tiedonvälitys propseilla'
-    const exercises2 = 7
-    const part3 = 'Komponenttien tila'
-    const exercises3 = 14
+    const part1 = {
+        name: 'Reactin perusteet',
+        exercises: 10
+      }
+      const part2 = {
+        name: 'Tiedonvälitys propseilla',
+        exercises: 7
+      }
+      const part3 = {
+        name: 'Komponenttien tila',
+        exercises: 14
+      }
+
 
     const Header = (props) => {
         return (
@@ -19,25 +25,27 @@ const App = () => {
         )
     }
     const Content = (props) => {
+    
         return (
            <div>
                 <p>
-                   {part1} {exercises1}
+                   {part1['name']} {part1['exercises']}
                 </p>
                 <p>
-                   {part2} {exercises2}
+                     {part2['name']} {part2['exercises']}
                 </p>
                 <p>
-                   {part3} {exercises3}
+                    {part3['name']} {part3['exercises']}
                 </p>
            </div>
         )
     }
+
     const Total = (props) => {
         return (
             <div>
                 <p>
-                    Yhteensä : {exercises1 + exercises2 + exercises3}
+                    Yhteensä : {part1['exercises'] + part2['exercises'] + part3['exercises']}
                 </p>
             </div>
         )
