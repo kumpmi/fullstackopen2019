@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 
 const App = () => {
     
-    const course = 'Half Stack -sovelluskehitys'
-    const parts = [
+  const course = {
+    name: 'Half Stack -sovelluskehitys',
+    parts: [
       {
         name: 'Reactin perusteet',
         exercises: 10
@@ -18,24 +19,34 @@ const App = () => {
         exercises: 14
       }
     ]
+  }
 
-    const partsmap = parts.map((part) => 
-   <li> {part['name']} {part['exercises']} </li> 
+   const coursename = course.name
+
+    const partsmap = course.parts.map((part) => 
+      <li key={part['name']}> {part['name']} {part['exercises']} </li>,
+ 
     );
-    //const total = parts.map((parts))
-             
-    const Total =  parts['0']['exercises'] + parts['1']['exercises'] + parts['2']['exercises']
-       
+    console.log({partsmap})
+
+    let sum = 0;
+    course.parts.map((item) =>
+        sum += item['exercises']
+      
+    )
+   console.log(sum)
     
 
-    return (
+    
+
+   return (
         <div>
-        <h1>{course}</h1>
+         <h1>{course.name}</h1>
         <ul>
-            {partsmap}     
+         {partsmap}
         </ul>
         <div>
-          Yhteensä: {Total}
+            yhteensä: {sum}
         </div>
             
       </div>
