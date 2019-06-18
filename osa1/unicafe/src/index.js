@@ -7,6 +7,7 @@ const Statistics = (props) => {
  const sum = props.good + props.neutral + props.bad;
  const avarage = ((props.good - props.bad) / sum);
  const positive = props.good / sum;
+ if (sum > 0) {
   return (
     <div>
       <h1>Statistiikka</h1>
@@ -34,6 +35,16 @@ const Statistics = (props) => {
         </table>
     </div>
   )
+ }
+ else {
+   console.log("summa on on nolla")
+   return (
+     <div>
+       <h1>Ei tilastoja</h1>
+      </div>
+   )
+ } 
+ 
 }
 
 const App = () => {
