@@ -10,8 +10,7 @@ const App = () => {
   const [bad, setBad] = useState(0)
 
   const setToGood = (newGood) => {
-    console.log("test") 
-    setGood(newGood)
+      setGood(newGood)
   }
   const setToNeutral = (newNeutral) => {
     setNeutral(newNeutral)
@@ -19,6 +18,11 @@ const App = () => {
   const setToBad = (newBad) => {
     setBad(newBad)
   }
+  const sum = good + bad + neutral;
+  
+  const avarage = ((good - bad)/sum);
+  const positive = good / sum ;
+  
 
 
   return (
@@ -27,10 +31,10 @@ const App = () => {
         <button onClick={() => setToGood(good => good + 1)} value="1">
         Hyvä
       </button>
-      <button onClick={() => setToNeutral(neutral => neutral + 1)} value="1">
+      <button onClick={() => setToNeutral(neutral => neutral + 1)} value="0">
         neutraali
       </button>
-      <button onClick={() => setToBad(bad => bad + 1) } value="1">
+      <button onClick={() => setToBad(bad => bad + 1) } value="-1">
         Huono
       </button>
       <div>
@@ -38,6 +42,9 @@ const App = () => {
          hyvä: {good} <br/>
          neutraali: {neutral} <br/>
          bad: {bad} <br/>
+         Yhteensä: {sum} <br/>
+         Keskiarvo: {avarage} <br/>
+         Positiivinen: {positive}
 
      
       </div>
