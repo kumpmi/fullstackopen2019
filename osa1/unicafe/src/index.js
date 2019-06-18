@@ -1,7 +1,40 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Statistics = (props) => {
+ console.log("props");
 
+ const sum = props.good + props.neutral + props.bad;
+ const avarage = ((props.good - props.bad) / sum);
+ const positive = props.good / sum;
+  return (
+    <div>
+      <h1>Statistiikka</h1>
+        <table>
+          <tbody>
+            <tr>
+              <td>Hyvä</td><td>{props.good}</td>
+            </tr>
+            <tr>
+              <td>Neutraali</td><td>{props.neutral}</td>
+            </tr>
+            <tr>
+              <td>Huono:</td><td>{props.bad}</td>
+            </tr>
+            <tr>
+              <td>Ynteensä</td><td>{sum}</td>
+            </tr>
+            <tr>
+              <td>Keksiarvo</td><td>{avarage}</td>
+            </tr>
+            <tr>
+              <td>Postiivinen palaute %</td><td>{positive}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  )
+}
 
 const App = () => {
   // tallenna napit omaan tilaansa
@@ -18,10 +51,8 @@ const App = () => {
   const setToBad = (newBad) => {
     setBad(newBad)
   }
-  const sum = good + bad + neutral;
   
-  const avarage = ((good - bad)/sum);
-  const positive = good / sum ;
+  
   
 
 
@@ -37,17 +68,7 @@ const App = () => {
       <button onClick={() => setToBad(bad => bad + 1) } value="-1">
         Huono
       </button>
-      <div>
-        <h1>Statistiikka</h1>
-         hyvä: {good} <br/>
-         neutraali: {neutral} <br/>
-         bad: {bad} <br/>
-         Yhteensä: {sum} <br/>
-         Keskiarvo: {avarage} <br/>
-         Positiivinen: {positive}
-
-     
-      </div>
+      <Statistics good={good} bad={bad} neutral={neutral} />
     </div>
   )
 }
