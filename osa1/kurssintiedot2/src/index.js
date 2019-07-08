@@ -35,10 +35,7 @@ const App = () => {
       
     )
    console.log(sum)
-    
-
-    
-
+  
    return (
         <div>
          <h1>{course.name}</h1>
@@ -52,6 +49,5 @@ const App = () => {
       </div>
     )
 }
-
 
 ReactDOM.render(<App />, document.getElementById('root'));

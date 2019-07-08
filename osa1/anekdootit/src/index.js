@@ -77,7 +77,7 @@ const anecdotes = [
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
- 
+  
 ReactDOM.render(
   <App anecdotes={anecdotes} />,
   document.getElementById('root'),
