@@ -1,59 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-/*
-const Header = props =>
-  <h1>{props.course}</h1>
-
-const Total = props => {
-  const total = props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises
-
-  return <p>yhteensä {total} tehtävää</p>
-}
-*/
+import Course from './Course'
 
   
-const Courses = props => {
 
-
-  const courseRows = props.courses.map((course, courseID) => {
-    console.log(course.name)
-    return (
-      <tbody key={courseID}>
-         <tr>
-            <th>
-                {course.name}
-            </th>
-          </tr>
-          {course.parts.map((part) => { 
-                return (
-                  <tr key={part.id}>
-                    <td>{part.name} </td>
-                    <td>{part.exercises} </td>
-                  </tr>
-                );
-              })} 
-          <tr>
-              <td>
-                Total exercises: 
-              </td>
-              <td>
-                  {course.parts.reduce(function(sum, exercise)  {
-                    return sum + exercise.exercises
-                  }, 0)}
-             </td>
-          </tr>
-      </tbody>
-    )
-  })
-
-  console.log(props)
-  return (
-    <table>
-       {courseRows}
-    </table>
-  )
-}
-const App = () => {
+const App = ({course}) => {
 
 
       const courses = [
@@ -102,12 +53,12 @@ const App = () => {
 
   return (
     <div>
-      <Courses courses={courses} />
+      <Course courses={courses} />
     </div>
   )
 }
 
 ReactDOM.render(
-  <App />,
+  <App  />,
   document.getElementById('root')
 )
