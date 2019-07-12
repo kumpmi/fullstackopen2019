@@ -15,7 +15,7 @@ const Course = props => {
     console.log("Kurssit array: " , props.course)
 
     const partRows = () => props.course.parts.map(part =>
-        <tr key={part.name}>
+        <tr key={part.id}>
               <td>
                  {part.name}
               </td>
@@ -57,27 +57,26 @@ const Content = props => (
 )
 
 const App = () => {
-  const course = {
-    name: 'Half Stack -sovelluskehitys',
-    parts: [
-      {
-        name: 'Reactin perusteet',
-        exercises: 10
-      },
-      {
-        name: 'Tiedonvälitys propseilla',
-        exercises: 7
-      },
-      {
-        name: 'Komponenttien tila',
-        exercises: 14
-      },
-      {
-          name: 'Extra kurssi',
-          exercises: 99
+    const course = {
+        name: 'Half Stack application development',
+        parts: [
+          {
+            name: 'Fundamentals of React',
+            exercises: 10,
+            id: 1
+          },
+          {
+            name: 'Using props to pass data',
+            exercises: 7,
+            id: 2
+          },
+          {
+            name: 'State of a component',
+            exercises: 14,
+            id: 3
+          }
+        ]
       }
-    ]
-  } 
 
   return (
     <div>
