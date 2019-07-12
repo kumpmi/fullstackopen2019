@@ -12,8 +12,7 @@ const Total = props => {
 */
 
 const Course = props => {
-    console.log("Kurssit array: " , props.course)
-
+   
     const partRows = () => props.course.parts.map(part =>
         <tr key={part.id}>
               <td>
@@ -23,8 +22,14 @@ const Course = props => {
                   {part.exercises}
               </td>
         </tr>
-        
       )
+
+      let exercisesArr = props.course.parts;
+      console.log(exercisesArr)
+      let totalExercies = () => exercisesArr.reduce(function(sum, exercise) {
+          return  sum + exercise.exercises
+      }, 0)
+      console.log(totalExercies)
    
     return (
        <div>
@@ -33,11 +38,18 @@ const Course = props => {
             <content>
                <table>
                    <tbody>
-                   {partRows()}
+                       {partRows()}
+                       <tr>
+                         <td>
+                           Total exercises: 
+                         </td>
+                         <td>
+                         {totalExercies()} 
+                         </td>
+                       </tr>
+                   
                    </tbody>
-               </table>
-                  
-                
+               </table>     
             </content>
         </div>
     )
