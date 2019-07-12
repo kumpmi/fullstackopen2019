@@ -11,88 +11,88 @@ const Total = props => {
 }
 */
 
-const Course = props => {
-   
-    const partRows = () => props.course.parts.map(part =>
-        <tr key={part.id}>
-              <td>
-                 {part.name}
-              </td>
-              <td>
-                  {part.exercises}
-              </td>
-        </tr>
-      )
-
-      let exercisesArr = props.course.parts;
-      console.log(exercisesArr)
-      let totalExercies = () => exercisesArr.reduce(function(sum, exercise) {
-          return  sum + exercise.exercises
-      }, 0)
-      console.log(totalExercies)
-   
-    return (
-       <div>
-            <h1>{props.course.name}</h1>
-       
-            <content>
-               <table>
-                   <tbody>
-                       {partRows()}
-                       <tr>
-                         <td>
-                           Total exercises: 
-                         </td>
-                         <td>
-                         {totalExercies()} 
-                         </td>
-                       </tr>
-                   
-                   </tbody>
-               </table>     
-            </content>
-        </div>
-    )
-   
-}
   
+const Courses = props => {
 
-const Part = props =>
-  <p>{props.part.name} {props.part.exercises}</p>
 
-const Content = props => (
-  <div>
-    <Part part={props.parts[0]} />
-    <Part part={props.parts[1]} />
-    <Part part={props.parts[2]} />
-  </div>
-)
+  const courseRows = props.courses.map((course, courseID) => {
+    console.log(course.name)
+    return (
+      <tbody key={courseID}>
+         <tr>
+            <th>
+                {course.name}
+            </th>
+          </tr>
+          {course.parts.map((part) => { 
+                return (
+                  <tr key={part.id}>
+                    <td>{part.name} </td>
+                    <td>{part.exercises} </td>
+                  </tr>
+                );
+              })} 
+      </tbody>
+    )
+  })
 
+  console.log(props)
+  return (
+    <table>
+       {courseRows}
+    </table>
+  )
+}
 const App = () => {
-    const course = {
-        name: 'Half Stack application development',
-        parts: [
-          {
-            name: 'Fundamentals of React',
-            exercises: 10,
-            id: 1
-          },
-          {
-            name: 'Using props to pass data',
-            exercises: 7,
-            id: 2
-          },
-          {
-            name: 'State of a component',
-            exercises: 14,
-            id: 3
-          }
-        ]
-      }
+
+
+      const courses = [
+        {
+          name: 'Half Stack application development',
+          parts: [
+            {
+              name: 'Fundamentals of React',
+              exercises: 10,
+              id: 1
+            },
+            {
+              name: 'Using props to pass data',
+              exercises: 7,
+              id: 2
+            },
+            {
+              name: 'State of a component',
+              exercises: 14,
+              id: 3
+            },
+            {
+              name: 'Redux',
+              exercises: 11,
+              id: 4
+            }
+          ]
+        }, 
+        {
+          name: 'Node.js',
+          parts: [
+            {
+              name: 'Routing',
+              exercises: 3,
+              id: 1
+            },
+            {
+              name: 'Middlewares',
+              exercises: 7,
+              id: 2
+            }
+          ]
+        }
+      ]
+
 
   return (
     <div>
-      <Course course={course} />
+      <Courses courses={courses} />
     </div>
   )
 }
