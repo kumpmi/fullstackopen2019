@@ -32,6 +32,16 @@ const Courses = props => {
                   </tr>
                 );
               })} 
+          <tr>
+              <td>
+                Total exercises: 
+              </td>
+              <td>
+                  {course.parts.reduce(function(sum, exercise)  {
+                    return sum + exercise.exercises
+                  }, 0)}
+             </td>
+          </tr>
       </tbody>
     )
   })
