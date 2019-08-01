@@ -1,10 +1,12 @@
 import React from 'react'
 
-const FilterPerson = () => {
+const FilterPerson = (props) => {
     return (
-        <div>
-            Filtteri tähän
-        </div>
+        <form>
+          Filter: <input value={props.newFilterPerson}
+         onChange={props.handlePersonFilter}
+          />
+        </form>
     )
 }
 

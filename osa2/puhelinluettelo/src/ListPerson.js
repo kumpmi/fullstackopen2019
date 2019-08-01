@@ -1,36 +1,20 @@
 import React from 'react'
 
-const ListPerson = (props) => {
-    const personList = props.persons.map((person) => {
-      
-        return (
-            <tbody key={person.name}>
-            <tr >
-                <td>{person.name}</td>
-            </tr>
-            </tbody>
-        )
-       
-    })
 
+const ListPerson = ( Persons ) => {
+
+    console.log("t'' on propsii:", Persons)
     return (
-        <div>
-            <h2>Numbers</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            Nimi:
-                        </th>
-                        <th>
-                            Numero
-                        </th>
-                    </tr>
-                </thead>
-                {personList}
-            </table>
-        </div>
+
+      <tr>
+        <td>
+            {Persons.name}
+        </td>
+        <td>
+            {Persons.number}
+        </td>
+      </tr>
     )
-}
+  }
 
 export default ListPerson
