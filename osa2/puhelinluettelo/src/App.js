@@ -1,24 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import AddPerson from './AddPerson';
 import ListPerson from './ListPerson';
-
 import FilterPerson from './FilterPerson';
 
 
 const App = () => {
 
-  const [ persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456' },
-    { name: 'Ada Lovelace', number: '39-44-5323523' },
-    { name: 'Dan Abramov', number: '12-43-234345' },
-    { name: 'Mary Poppendieck', number: '39-23-6423122' }
-  ]) 
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setPersons(response.data)
+      })
+  }, [])
+ 
+
+  const [ persons, setPersons] = useState([]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilterPerson, setNewFilterPerson ] = useState('')
 
   const handlePersonFilter = (filterEvent) => {
-  
      setNewFilterPerson(filterEvent.target.value)
   }
 
@@ -34,13 +40,6 @@ const App = () => {
       )
   };
   
- 
-  const personFilter = filterItems(persons, newFilterPerson)
-
-  
-  
-  
-
   const handleNameChange = (event) => {
     console.log(event.target.value)
     setNewName(event.target.value)
@@ -49,8 +48,6 @@ const App = () => {
     console.log(event.target.value)
     setNewNumber(event.target.value)
   }
-
-
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -77,7 +74,6 @@ const App = () => {
   
   }
 
-  
   return (
     <div>
       <div>
