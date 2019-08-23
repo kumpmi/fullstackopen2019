@@ -5,6 +5,10 @@ const CountryList = ( Countries ) => {
   console.log(Countries)
  
   if (Countries.size === 1) {
+
+  //  Countries.getWeather(Countries.capital)
+    
+   
     return (
           <div>
             <div>
@@ -26,6 +30,12 @@ const CountryList = ( Countries ) => {
           </div>
             <div>
             <img width="100px" src={Countries.flag} alt="Lippu" />
+          </div>
+          <div>
+                  <h2>Weather in {Countries.capital}</h2>
+
+                  {Countries.getWeather(Countries.capital)}
+          
           </div>
         </div>
 
