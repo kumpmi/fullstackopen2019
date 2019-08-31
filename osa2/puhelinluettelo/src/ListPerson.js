@@ -13,6 +13,9 @@ const ListPerson = ( Persons ) => {
         <td>
             {Persons.number}
         </td>
+        <td>
+          <button onClick={() => { if (window.confirm('Delete ?')) Persons.handleDeletePerson(Persons.id)} }>Delete</button>
+        </td>
       </tr>
     )
   }

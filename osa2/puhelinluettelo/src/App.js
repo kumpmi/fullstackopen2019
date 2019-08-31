@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import AddPerson from './AddPerson';
 import ListPerson from './ListPerson';
 import FilterPerson from './FilterPerson';
-
+import personService from './services/Persons'
 
 const App = () => {
 
-
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
+    personService
+      .getAll()
       .then(response => {
-        console.log('promise fulfilled')
         setPersons(response.data)
       })
   }, [])
- 
+
 
   const [ persons, setPersons] = useState([]) 
   const [ newName, setNewName ] = useState('')
@@ -31,11 +27,14 @@ const App = () => {
   const filterItems = (filteredPersons, newFilterPerson) => {
     let filtered = filteredPersons.filter(fp => fp.name.toLowerCase().indexOf(newFilterPerson.toLowerCase()) !== -1)
     console.log(filtered)
+
     return filtered.map(f =>
       <ListPerson
         key={f.name}
+        id={f.id}
         name={f.name}
         number={f.number}
+        handleDeletePerson={handleDeletePerson}
       />
       )
   };
@@ -49,27 +48,70 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const handleDeletePerson = (id) => {
+    console.log('Klikattu')
+    personService
+    .deletePerson(id)
+    .then(response => {
+        console.log(response.data)
+    })
+    .finally(function () {
+      console.log('excuted')
+      personService
+      .getAll()
+      .then(response => {
+        console.log(response.data)
+        setPersons(response.data)
+      })
+    });
+   
+
+  }
+
   const addPerson = (event) => {
     event.preventDefault()
     var error = 0;
 
+    const personObject = {
+      name: newName,
+      number: newNumber
+    }
+
     persons.forEach(element => {
       console.log(element.name)
       if (element.name === newName) {
-        error += 1
-        setNewName('')
-        return alert(`${newName} is already added to phonebook` )  ;
+        if (window.confirm('Do you want to update number?')){
+          personService
+          .update(element.id,personObject)
+          .then(response => {
+             
+          })
+          .finally(function () {
+            console.log('excuted')
+            personService
+            .getAll()
+            .then(response => {
+              console.log(response.data)
+              setPersons(response.data)
+            })
+          });
+        }
+          error += 1
+          setNewName('')
+
       }
     
     });
     if (error === 0) {
-      const personObject = {
-        name: newName,
-        number: newNumber
-      }
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewNumber('')
+
+      personService
+      .create(personObject)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+        setNewName('')
+        setNewNumber('')
+      })
+ 
     }
   
   }
