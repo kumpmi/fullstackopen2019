@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import AddPerson from './AddPerson';
 import ListPerson from './ListPerson';
 import FilterPerson from './FilterPerson';
-import personService from './services/Persons'
+import personService from './services/Persons';
+import Notification from './Notification'
+import './index.css'
 
 const App = () => {
 
@@ -19,6 +21,7 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilterPerson, setNewFilterPerson ] = useState('')
+  const [ message, setNewMessage] = useState([])
 
   const handlePersonFilter = (filterEvent) => {
      setNewFilterPerson(filterEvent.target.value)
@@ -49,11 +52,36 @@ const App = () => {
   }
 
   const handleDeletePerson = (id) => {
-    console.log('Klikattu')
+
     personService
     .deletePerson(id)
     .then(response => {
-        console.log(response.data)
+
+      const messageObject = {
+        type: 'success',
+        string: `Deleted ${id}`
+      }
+      console.log(messageObject)
+        setNewMessage(messageObject) 
+        setTimeout(() => {
+          setNewMessage(null)
+        }, 5000)
+     
+    })
+    .catch(error => {
+
+      const messageObject = {
+        type: 'error',
+        string: ` ${id} is already deleted`
+      }
+      console.log(messageObject)
+        setNewMessage(messageObject) 
+
+        setTimeout(() => {
+          setNewMessage(null)
+        }, 5000)
+     
+
     })
     .finally(function () {
       console.log('excuted')
@@ -83,8 +111,15 @@ const App = () => {
         if (window.confirm('Do you want to update number?')){
           personService
           .update(element.id,personObject)
+          .catch(error => {
+            const  messageType = 'error'
+            const messageString = `${newName} is not updated to phonebook`
+              createMessage(messageType,messageString)
+          })
           .then(response => {
-             
+           const  messageType = 'success'
+           const messageString = `${newName} is updated to phonebook`
+             createMessage(messageType,messageString)
           })
           .finally(function () {
             console.log('excuted')
@@ -106,13 +141,38 @@ const App = () => {
 
       personService
       .create(personObject)
+      .catch(error => {
+        const messageType = 'error'
+        const messageString = `${newName} is NOT added to phonebook`
+         createMessage(messageType,messageString)
+       }
+      )
       .then(response => {
         setPersons(persons.concat(response.data))
         setNewName('')
         setNewNumber('')
+       
+       const messageType = 'success'
+       const messageString = `${newName} is added to phonebook`
+        createMessage(messageType,messageString)
+        
       })
  
     }
+
+   const createMessage = (type, string) => {
+    const messageObject = {
+      type: type,
+      string: string
+    }
+    console.log(messageObject)
+      setNewMessage(messageObject) 
+
+      setTimeout(() => {
+        setNewMessage(null)
+      }, 5000)
+   
+   }
   
   }
 
@@ -120,6 +180,9 @@ const App = () => {
     <div>
       <div>
         <FilterPerson handlePersonFilter={handlePersonFilter} />
+      </div>
+      <div>
+      <Notification message={message} />
       </div>
       <div>
         <AddPerson 

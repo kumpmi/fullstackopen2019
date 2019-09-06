@@ -3,7 +3,6 @@ import React from 'react'
 
 const ListPerson = ( Persons ) => {
 
-    console.log("t'' on propsii:", Persons)
     return (
 
       <tr>
